@@ -535,6 +535,11 @@ def SciterAPI():
             import sys
             scdll = find_sciter("libsciter-gtk-64" if sys.maxsize > 2**32 else "libsciter-gtk-32")
 
+        if SCITER_OSX and scdll is None:
+            # try the old name
+            import sys
+            scdll = find_sciter("sciter-osx-64" if sys.maxsize > 2**32 else "libsciter-osx-32")
+
     if not scdll:
         raise ImportError(SCITER_LOAD_ERROR + "\n" + "\n".join(errors))
 
